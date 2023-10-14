@@ -23,7 +23,7 @@
     height: 32px;
 }
 
-.header .text-wrapper {
+.image-extractor .text-wrapper {
     position: relative;
     width: fit-content;
     margin-top: -1px;
