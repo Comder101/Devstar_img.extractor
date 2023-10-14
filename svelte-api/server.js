@@ -1,28 +1,33 @@
-const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-const app = express();
-const port = 3001;
-
-app.use(express.json());
-
-app.post('/api/scrape', async (req, res) => {
-  const { url } = req.body;
-
+async function scrapeImages(url) {
   try {
+    // Fetch HTML content of the page
     const response = await axios.get(url);
-    const $ = cheerio.load(response.data);
+    const html = response.data;
 
-    const imgUrls = $('img').map((_, img) => $(img).attr('src')).get();
+    // Parse HTML using Cheerio
+    const $ = cheerio.load(html);
 
-    res.json({ success: true, imgUrls });
+    // Select image elements (adjust the selector based on the structure of the HTML)
+    const imageElements = $('img');
+
+    // Extract image source URLs
+    const imageUrls = imageElements.map((_, element) => $(element).attr('src')).get();
+
+    // Filter URLs by extension (e.g., only include '.jpg' and '.png' images)
+    const allowedExtensions = ['.jpg', '.jpeg', '.png'];
+    const filteredUrls = imageUrls.filter(url => allowedExtensions.some(ext => url.endsWith(ext)));
+
+    return filteredUrls;
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, error: 'Internal Server Error' });
+    console.error('Error:', error.message);
   }
-});
+}
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+// Example usage
+const url = 'https://www.iitb.ac.in/';
+scrapeImages(url).then(filteredUrls => {
+  console.log('Filtered Image URLs:', filteredUrls);
 });
