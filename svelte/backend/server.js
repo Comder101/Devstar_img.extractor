@@ -5,10 +5,6 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/', async (req, res) => {
-    res.send('Send a POST request to /api/extractImages with the URL to extract images.');
-});
-
 app.post('/api/extractImages', async (req, res) => {
     const { url } = req.body;
 

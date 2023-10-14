@@ -1,10 +1,10 @@
 import axios from 'axios';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 
 const extractImages = async (url) => {
     try {
         const response = await axios.get(url);
-        const $ = cheerio.load(response.data);
+        const $ = load(response.data);
         const images = [];
 
         $('img').each((index, element) => {
