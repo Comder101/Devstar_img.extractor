@@ -1,6 +1,7 @@
 <script>
 	let url = "";
 	let imgUrls = [];
+	let inputURL = '';
 
 	const scrape = async () => {
 		try {
@@ -29,6 +30,8 @@
 			// Assuming the 'mainresframe-container' is the div you want to display
 			var resultsContainer = document.getElementById("resultsContainer");
 			resultsContainer.style.display = "block";
+			var siteshow = document.getElementById("site-show")
+			siteshow.innerText = urlInput
 
 			// Hide other elements if needed
 			// ...
@@ -247,51 +250,23 @@
 		document.body.removeChild(textarea);
 	}
 </script>
-
-<main>
-	<h1>Image Scraper</h1>
-
-	<label for="url">Enter URL:</label>
-	<input type="text" id="url" bind:value={url} />
-
-	<button on:click={scrape}>Scrape Images</button>
-
-	{#if imgUrls.length > 0}
-		<h2>Image URLs:</h2>
-		<ul>
-			{#each imgUrls as imgUrl}
-				<li>{imgUrl}</li>
-			{/each}
-		</ul>
-	{/if}
-</main>
-
+<div class="entire-page">
 <div class="header">
 	<div class="image-extractor">
-		<!-- <img class="image" src="img/image.png" alt="1" /> -->
-		<div class="text-wrapper">Image Extractor</div>
+	  <img class="image" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png" alt="1" />
+	  <div class="text-wrapper">Image Extractor</div>
 	</div>
 	<div class="nav-bar">
-		<button class="button-3"
-			><a class="button-2" href="/home.html">Home</a></button
-		>
-		<button class="button-3"
-			><a class="button-2" href="#aboutus">About us</a></button
-		>
-		<button class="button-3"
-			><a class="button-2" href="#faq">Help Center</a></button
-		>
+	  <a class="button" href="#home.html">Home</a>
+	  <a class="button" href="#aboutus">About us</a>
+	  <a class="button" href="#faq">Help Center</a>
 	</div>
 	<div class="login">
-		<button class="button-wrapper-2"
-			><a class="button-2" href="/login.html">Login</a></button
-		>
-		<button class="button-wrapper-2"
-			><a class="button-2" href="/signup.html">Sign up</a></button
-		>
+	  <a class="button" href="/login.html">Login</a>
+	  <a class="button" href="/signup.html">Sign up</a>
 	</div>
-</div>
-<div class="res-load">
+  </div>  
+  <div class="res-load">
 	<div class="div">
 		<div class="home-container">
 			<div class="home-frame14">
@@ -303,18 +278,16 @@
 					>
 				</div>
 				<div class="home-searchbar">
-					<div class="home-urlbar">
-						<input
-							id="urlInput"
-							class="home-text04"
-							type="text"
-							placeholder="Enter any URL"
-						/>
-					</div>
+					<input
+						id="urlInput"
+						type="text"
+						name= 'url-bar'
+						placeholder="Enter any URL"
+					/>
+					<button on:click={showResults} class="home-button">
+						Extract
+					</button>
 				</div>
-				<button on:click={showResults} class="home-button">
-					<span class="home-text06"><span>Extract</span></span>
-				</button>
 			</div>
 		</div>
 		<div class="main-res-frame">
@@ -326,13 +299,8 @@
 				<div class="side-bar-sort">
 					<div class="sort">
 						<div class="sort-head">
-							<div class="text-wrapper">
+							<div class="text-wrapper" style="align-items: center;">
 								<label for="sortOptions">Sort By:</label>
-							</div>
-							<div class="sort-size">
-								<div class="big-small">
-									<div class="big-small-2">Big -> Small</div>
-								</div>
 							</div>
 						</div>
 						<div class="sort-menu">
@@ -391,53 +359,50 @@
 							</div>
 						</div>
 					</div>
-					<div class="search">
-						<div class="text-wrapper-9">Serach for images</div>
-						<div class="url-bar">
-							<div class="enter-any-URL">Type to Search....</div>
-						</div>
-						<div class="text-wrapper-10">Download</div>
-					</div>
 					<div class="download-buttons">
 						<div class="select-deselect">
-							<div class="white-button">
+							<div class="white-button" on:click={selectAll}>
 								<img
 									class="img"
-									src="img/check-circle.png"
+									src="https://static.thenounproject.com/png/542179-200.png"
 									alt="a"
 								/>
-								<div class="text-wrapper-11">
-									<button on:click={selectAll}
-										>Select All</button
-									>
+								<div class="text-wrapper-11">Select All
 								</div>
 							</div>
-							<div class="white-button">
+							<div class="white-button" on:click={deselectAll}>
 								<img
 									class="img"
-									src="img/radio-button-unchecked.png"
+									src="https://static.thenounproject.com/png/1461827-200.png"
 									alt="h"
 								/>
-								<div class="text-wrapper-11">
-									<button on:click={deselectAll}
-										>Deselect All</button
-									>
+								<div class="text-wrapper-11">Deselect All
 								</div>
 							</div>
 						</div>
 						<div class="white-button-2">
 							<img
 								class="img"
-								src="img/content-paste.png"
+								src="https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_content_paste_48px-512.png"
 								alt="k"
 							/>
 							<div class="copy-selected-urls">
-								Copy selected&nbsp;&nbsp;URLs
+								Copy selected URLs
 							</div>
 						</div>
 						<div class="white-button-3">
-							<img class="img" src="img/download-3.png" alt="j" />
+							<img class="img" src="https://iihl.org/wp-content/uploads/2020/02/download-icon-white-png-1.png" alt="j" />
 							<div class="text-wrapper-12">Download Selected</div>
+						</div>
+						<div class="white-button-2" on:click={toggleImageOrientation}>
+							<img 
+								class="img"
+								src="https://icons.veryicon.com/png/o/miscellaneous/itsm-management/change-management.png"
+								alt="k"
+							/>
+							<div class="copy-selected-urls" >
+								Toggle Image Orientation
+							</div>
 						</div>
 					</div>
 				</div>
@@ -445,11 +410,8 @@
 					<div class="result-header">
 						<p class="showing-images-from">
 							<span class="span">Showing images from </span>
-							<span class="text-wrapper-13">dribble.com</span>
+							<span id= 'site-show' class="text-wrapper-13">??</span>
 						</p>
-						<button on:click={toggleImageOrientation}
-							>Toggle Image Orientation</button
-						>
 					</div>
 					<div class="horizontal">
 						<div class="image-frame-vertical" data-selected="false">
@@ -943,187 +905,228 @@
 			</div>
 			<div class="faq">
 				<div class="faq-header">
-					<div class="text-wrapper-16">
-						Frequently asked questions
-					</div>
-					<p class="if-you-can-t-find">
-						<span class="text-wrapper-17"
-							>If you can’t find what you’re looking for, write us
-							a message and we&#39;ll get back to you.</span
-						>
-					</p>
+					<span class="text-wrapper-16">Frequently asked questions</span>
+					<span class="text-wrapper-17"
+						>If you can’t find what you’re looking for, write us
+						a message and we&#39;ll get back to you.</span>
 				</div>
 				<div class="faq-frame">
 					<div class="text-wrapper-18">What is extract.pics?</div>
 					<div class="lorem-ipsum-dolor">
-						<p class="p">
-							Lorem ipsum dolor sit amet consectetur. Orci
-							consequat congue orci etiam mattis aliquam tincidunt
-							felis porttitor. Tortor turpis aliquam ullamcorper
-							nam erat consequat. Et amet pellentesque turpis eget
-							ac justo eu gravida. Sed sodales feugiat mauris
-							aliquam blandit justo bibendum proin. Pretium risus
-							quis varius vestibulum sed leo cras morbi. Cras
-							lectus ut mattis ligula pretium lacus commodo.
-							Ullamcorper nam consequat morbi eros lorem sit. Et
-							ullamcorper consequat sit nunc eget quam. Lacus
-							massa magna scelerisque ac interdum.
-						</p>
+						Lorem ipsum dolor sit amet consectetur. Orci
+						consequat congue orci etiam mattis aliquam tincidunt
+						felis porttitor. Tortor turpis aliquam ullamcorper
+						nam erat consequat. Et amet pellentesque turpis eget
+						ac justo eu gravida. Sed sodales feugiat mauris
+						aliquam blandit justo bibendum proin. Pretium risus
+						quis varius vestibulum sed leo cras morbi. Cras
+						lectus ut mattis ligula pretium lacus commodo.
+						Ullamcorper nam consequat morbi eros lorem sit. Et
+						ullamcorper consequat sit nunc eget quam. Lacus
+						massa magna scelerisque ac interdum.
+					</div>
+				</div>
+
+				<div class="faq-frame">
+					<div class="text-wrapper-18">What is extract.pics?</div>
+					<div class="lorem-ipsum-dolor">
+						Lorem ipsum dolor sit amet consectetur. Orci
+						consequat congue orci etiam mattis aliquam tincidunt
+						felis porttitor. Tortor turpis aliquam ullamcorper
+						nam erat consequat. Et amet pellentesque turpis eget
+						ac justo eu gravida. Sed sodales feugiat mauris
+						aliquam blandit justo bibendum proin. Pretium risus
+						quis varius vestibulum sed leo cras morbi. Cras
+						lectus ut mattis ligula pretium lacus commodo.
+						Ullamcorper nam consequat morbi eros lorem sit. Et
+						ullamcorper consequat sit nunc eget quam. Lacus
+						massa magna scelerisque ac interdum.
 					</div>
 				</div>
 				<div class="faq-frame">
 					<div class="text-wrapper-18">What is extract.pics?</div>
 					<div class="lorem-ipsum-dolor">
-						<p class="p">
-							Lorem ipsum dolor sit amet consectetur. Orci
-							consequat congue orci etiam mattis aliquam tincidunt
-							felis porttitor. Tortor turpis aliquam ullamcorper
-							nam erat consequat. Et amet pellentesque turpis eget
-							ac justo eu gravida. Sed sodales feugiat mauris
-							aliquam blandit justo bibendum proin. Pretium risus
-							quis varius vestibulum sed leo cras morbi. Cras
-							lectus ut mattis ligula pretium lacus commodo.
-							Ullamcorper nam consequat morbi eros lorem sit. Et
-							ullamcorper consequat sit nunc eget quam. Lacus
-							massa magna scelerisque ac interdum.
-						</p>
+						Lorem ipsum dolor sit amet consectetur. Orci
+						consequat congue orci etiam mattis aliquam tincidunt
+						felis porttitor. Tortor turpis aliquam ullamcorper
+						nam erat consequat. Et amet pellentesque turpis eget
+						ac justo eu gravida. Sed sodales feugiat mauris
+						aliquam blandit justo bibendum proin. Pretium risus
+						quis varius vestibulum sed leo cras morbi. Cras
+						lectus ut mattis ligula pretium lacus commodo.
+						Ullamcorper nam consequat morbi eros lorem sit. Et
+						ullamcorper consequat sit nunc eget quam. Lacus
+						massa magna scelerisque ac interdum.
 					</div>
 				</div>
 			</div>
-			<footer class="footer">
+			<footer>
 				<div class="frame-7">
-					<img class="img-2" src="img/copyright.png" alt="" />
+					<img class="img-2" src="https://1000logos.net/wp-content/uploads/2021/07/Copyright-Symbol.png" alt="" />
 					<div class="text-wrapper-19">image-extract</div>
 				</div>
 				<div class="frame-8">
 					<div class="text-wrapper-20">Status</div>
-					<div class="text-wrapper-21">Changelog</div>
-					<div class="text-wrapper-19">Documentation</div>
-					<div class="text-wrapper-19">Privacy and Cookie</div>
-					<div class="text-wrapper-19">Terms of service</div>
+					<div class="text-wrapper-20">Changelog</div>
+					<div class="text-wrapper-20">Documentation</div>
+					<div class="text-wrapper-20">Privacy and Cookie</div>
+					<div class="text-wrapper-20">Terms of service</div>
 				</div>
 			</footer>
 		</div>
 	</div>
 </div>
-
+</div>
 <style>
+	.entire-page{
+		max-width: 100%;
+	}
 	.header {
 		display: flex;
-		width: 1300px;
+		width: 100%;
 		align-items: flex-start;
-		gap: 300px;
-		padding: 10px 20px;
-		position: relative;
+		flex-wrap: wrap;
+		padding: 10px;
 		background-color: #f5f0f3;
+		justify-content: space-between;
 	}
 
 	.header .image-extractor {
 		display: flex;
 		align-items: center;
 		gap: 5px;
-		position: relative;
 		flex: 1;
 		flex-grow: 1;
 	}
 
-	.header .text-wrapper {
+	.header .nav-bar {
+		display: flex;
+		flex: 1;
+		flex-grow: 1;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+	}
+
+	.nav-bar .button {
+		display: inline-block;
+		padding: 10px 20px;
+		font-family: "Jost", Helvetica;
+		font-size: 15px;
+		font-weight: bold;
+		color: #282445;
+		border-radius: 25px;
+		text-decoration: none;
+		transition: background-color 0.2s;
+	}
+
+	.nav-bar .button:hover {
+		background-color: #4750a18f;
+		color: #f5f0f3;
+	}
+
+	.header .login {
+		display: flex;
+		flex: 1;
+		flex-grow: 1;
+		justify-content: flex-end;
+		gap: 10px;
+		align-items: center;
+	}
+
+	.login .button {
+		display: inline-block;
+		padding: 10px 20px;
+		font-family: "Jost", Helvetica;
+		font-size: 15px;
+		background-color: #6b73c1;
+		color: #f5f0f3;
+		border-radius: 25px;
+		text-decoration: none;
+		transition: background-color 0.2s;
+	}
+
+	.login .button:hover{
+		background-color: #2b3277;
+	}
+
+	.image-extractor .image {
+		position: relative;
+		width: 32px;
+		height: 32px;
+
+	}
+
+	.image-extractor .text-wrapper {
 		position: relative;
 		width: fit-content;
 		margin-top: -1px;
 		font-family: "Jost-Medium", Helvetica;
 		font-weight: 500;
 		color: #282445;
-		font-size: 30px;
+		font-size: 25px;
 		letter-spacing: 0;
 		line-height: normal;
 	}
 
-	.header .nav-bar {
-		display: flex;
+	@media (max-width: 768px) {
+	.header {
+		flex-direction: column; 
 		align-items: center;
-		justify-content: center;
-		gap: 2px;
-		position: relative;
-		flex: 1;
-		flex-grow: 1;
+		text-align: center; 
 	}
 
+	.header .image-extractor,
+	.header .nav-bar,
 	.header .login {
-		justify-content: flex-end;
-		gap: 12px;
-		flex: 1;
-		flex-grow: 1;
-		display: flex;
-		height: 40px;
-		align-items: center;
-		position: relative;
+		margin-bottom: 10px; 
 	}
 
-	.header .button-wrapper-2 {
-		width: 100px;
-		justify-content: center;
-		gap: 10px;
-		padding: 10px;
-		background-color: #6b73c1;
-		border-radius: 25px;
+	.res-load, .main-res-frame{
 		display: flex;
-		height: 40px;
-		align-items: center;
-		position: relative;
-		all: unset;
-		box-sizing: border-box;
-	}
-
-	.header .button-2 {
-		position: relative;
-		width: fit-content;
-		margin-top: -5.5px;
-		margin-bottom: -3.5px;
-		font-family: "Jost-Medium", Helvetica;
-		font-weight: 500;
-		color: #f5f0f3;
-		font-size: 20px;
-		letter-spacing: 0;
-		line-height: normal;
-		all: unset;
-		box-sizing: border-box;
-	}
-
-	.home-frame14 {
-		gap: 100px;
-		top: 100px;
-		width: 1350px;
-		display: flex;
-		position: relative;
-		align-items: center;
 		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		padding: 10px; 
+	}
+
+	.faq-frame{
+		width: 100%;
+	}
+
+}
+	.res-load {
+		background: url("https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80") center/cover;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		position: relative;
+	}
+
+	.res-load .div {
+		background-color: #28244579;
+		background-size: crgba(109, 234, 243, 0.356);		
+		position: relative;
+	}
+
+	.home-container{
+		color: #F5F0F3;
+		height: auto;
+		font-style: Medium;
+		text-align: center;
+		font-family: "Jost-Medium", Helvetica;
+		padding: 60px; 
 	}
 
 	.home-text {
-		color: rgb(0, 0, 0);
-		height: auto;
-		font-size: 70px;
+		font-size: 60px;
 		font-style: Medium;
-		text-align: left;
-		font-family: Jost;
 		font-weight: 500;
-		line-height: normal;
-		font-stretch: normal;
-		text-decoration: none;
 	}
 
 	.home-text02 {
-		color: rgb(0, 0, 0);
-		height: auto;
 		font-size: 20px;
-		font-style: Bold;
-		text-align: left;
-		font-family: Bitter;
-		font-weight: 700;
-		line-height: normal;
-		font-stretch: normal;
-		text-decoration: none;
+		font-weight: 300;
 	}
 
 	.home-searchbar {
@@ -1131,30 +1134,40 @@
 		display: flex;
 		align-items: center;
 		flex-direction: column;
+		padding-top: 40px;
 	}
 
-	.home-urlbar {
-		gap: 10px;
+	.home-searchbar input{
 		width: 578px;
 		display: flex;
 		padding: 10px;
-		align-items: center;
 		flex-shrink: 0;
-		border-color: rgba(245, 240, 243, 1);
+		border-color: #F5F0F3;
+		color: #F5F0F3;
+		background-color: transparent;
 		border-style: solid;
 		border-width: 1px;
 		border-radius: 10px;
 	}
 
-	.home-text04 {
-		height: auto;
-		font-size: 20px;
-		font-style: Bold;
-		font-weight: 700;
-		line-height: normal;
+	.home-searchbar input::placeholder{
+		color: #f5f0f3d7;
 	}
 
+
 	.home-button {
+		width: 106px;
+		display: flex;
+		padding: 10px;
+		align-items: center;
+		border-radius: 25px;
+		justify-content: center;
+		background-color: #565464;
+		color: #BCACAC;
+
+	}
+
+	.home-button:hover {
 		gap: 10px;
 		width: 106px;
 		display: flex;
@@ -1163,67 +1176,37 @@
 		flex-shrink: 0;
 		border-radius: 25px;
 		justify-content: center;
-		background-color: rgba(85, 83, 99, 1);
-	}
+		background-color: #2b3277;
+		color: #F5F0F3;
 
-	.home-text06 {
-		color: rgba(188, 171, 171, 1);
-		height: auto;
-		font-size: 20px;
-		font-style: Medium;
-		text-align: left;
-		font-family: Jost;
-		font-weight: 500;
-		line-height: normal;
-		font-stretch: normal;
-		text-decoration: none;
-	}
-
-	.res-load {
-		background-color: transparent;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		position: relative;
-		/* background-image: url("./background.jpg"); */
-		background-color: #6debf3;
-		background-size: cover;
-	}
-
-	.res-load .div {
-		/* background-image: url(./background.jpg); */
-		background-color: #6debf3;
-		background-size: cover;
-		position: relative;
 	}
 
 	.res-load .main-res-frame {
 		display: flex;
+		justify-content: center;
+		align-items: center;
 		flex-direction: column;
-		width: 1300px;
-		align-items: flex-start;
-		gap: 100px;
+		width: 100%;
 		position: relative;
-		top: 152px;
-		left: 0;
+		padding: 10px;
 	}
 
 	.res-load .main-res-frame-2 {
 		display: flex;
-		width: 1250px;
+		justify-content: center;
 		align-items: center;
-		gap: 100px;
-		padding: 0px 50px;
+		flex-direction: column;
+		width: 100%;
 		position: relative;
-		flex: 0 0 auto;
+		padding: 10px;
 	}
 
 	.res-load .side-bar-sort {
 		display: flex;
 		flex-direction: column;
-		width: 520px;
-		height: 615px;
-		align-items: flex-start;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
 		gap: 31px;
 		padding: 0px 10px;
 		position: relative;
@@ -1232,19 +1215,20 @@
 	.res-load .sort {
 		display: flex;
 		flex-direction: column;
-		width: 500px;
+		width: 100%;
 		align-items: center;
+		justify-content: center;
 		gap: 9px;
 		position: relative;
-		flex: 0 0 auto;
+		padding: 10px;
 	}
 
 	.res-load .sort-head {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		gap: 71px;
 		position: relative;
-		align-self: stretch;
 		width: 100%;
 		flex: 0 0 auto;
 	}
@@ -1258,36 +1242,7 @@
 		font-size: 18px;
 		letter-spacing: 0;
 		line-height: normal;
-	}
-
-	.res-load .sort-size {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
 		justify-content: center;
-		gap: 10px;
-		padding: 10px;
-		position: relative;
-		flex: 1;
-		flex-grow: 1;
-	}
-
-	.res-load .big-small {
-		position: relative;
-		width: 95px;
-		height: 26px;
-	}
-
-	.res-load .big-small-2 {
-		position: absolute;
-		top: -1px;
-		left: 0;
-		font-family: "Jost-Regular", Helvetica;
-		font-weight: 400;
-		color: #9c9a9b;
-		font-size: 18px;
-		letter-spacing: 0;
-		line-height: normal;
 	}
 
 	.res-load .sort-menu {
@@ -1499,63 +1454,6 @@
 		line-height: normal;
 	}
 
-	.res-load .search {
-		display: inline-flex;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 15px;
-		position: relative;
-		flex: 0 0 auto;
-	}
-
-	.res-load .text-wrapper-9 {
-		position: relative;
-		width: fit-content;
-		margin-top: -1px;
-		font-family: "Jost-Medium", Helvetica;
-		font-weight: 500;
-		color: #ffffff;
-		font-size: 18px;
-		letter-spacing: 0;
-		line-height: normal;
-	}
-
-	.res-load .url-bar {
-		display: flex;
-		width: 500px;
-		align-items: center;
-		gap: 10px;
-		padding: 10px;
-		position: relative;
-		flex: 0 0 auto;
-		border-radius: 10px;
-		border: 1px solid;
-		border-color: #f5f0f3;
-	}
-
-	.res-load .enter-any-URL {
-		position: relative;
-		width: fit-content;
-		margin-top: -1px;
-		font-family: "Jost-Bold", Helvetica;
-		font-weight: 700;
-		color: #ffffff;
-		font-size: 20px;
-		letter-spacing: 0;
-		line-height: normal;
-	}
-
-	.res-load .text-wrapper-10 {
-		position: relative;
-		width: fit-content;
-		font-family: "Jost-Bold", Helvetica;
-		font-weight: 700;
-		color: #ffffff;
-		font-size: 20px;
-		letter-spacing: 0;
-		line-height: normal;
-	}
-
 	.res-load .download-buttons {
 		display: flex;
 		flex-direction: column;
@@ -1565,6 +1463,7 @@
 		gap: 20px;
 		position: relative;
 		flex: 0 0 auto;
+		padding-bottom: 20px;
 	}
 
 	.res-load .select-deselect {
@@ -1590,6 +1489,7 @@
 		margin-bottom: -1px;
 		background-color: #f5f0f3;
 		border-radius: 10px;
+		cursor: pointer;
 		box-shadow: 0px 4px 4px #00000040;
 	}
 
@@ -1621,6 +1521,7 @@
 		gap: 10px;
 		position: relative;
 		flex: 0 0 auto;
+		cursor: pointer;
 		box-shadow: 0px 4px 4px #00000040;
 	}
 
@@ -1646,6 +1547,7 @@
 		gap: 10px;
 		position: relative;
 		flex: 0 0 auto;
+		cursor: pointer;
 		box-shadow: 0px 4px 4px #00000040;
 	}
 
@@ -1664,7 +1566,8 @@
 	.res-load .res-frame {
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: center;
+		justify-items: center;
 		gap: 20px;
 		position: relative;
 		flex: 1;
@@ -1677,7 +1580,7 @@
 		width: 452px;
 		align-items: center;
 		gap: 10px;
-		padding: 10px;
+		padding: 5px;
 		position: relative;
 		flex: 0 0 auto;
 	}
@@ -1685,13 +1588,10 @@
 	.res-load .showing-images-from {
 		position: relative;
 		flex: 1;
-		margin-top: -1px;
 		font-family: "Jost-Regular", Helvetica;
 		font-weight: 400;
 		color: #ffffff;
 		font-size: 18px;
-		letter-spacing: 0;
-		line-height: normal;
 	}
 
 	.res-load .span {
@@ -1818,106 +1718,74 @@
 		gap: 50px;
 		left: 20px;
 		flex-direction: column;
-		align-items: flex-start;
-		width: 1300px;
-		position: relative;
+		align-items: center;
+		max-width: 100%;
 	}
 
 	.res-load .faq-header {
 		display: inline-flex;
 		flex: 0 0 auto;
 		flex-direction: column;
-		align-items: flex-start;
-		position: relative;
+		font-family: "Jost-Medium", Helvetica;
+		color: #F5F0F3;
 	}
 
 	.res-load .text-wrapper-16 {
 		position: relative;
-		align-self: stretch;
-		margin-top: -1px;
-		font-family: "Jost-Medium", Helvetica;
+		align-self: center;
 		font-weight: 500;
-		color: #ffffff;
-		font-size: 40px;
-		letter-spacing: 0;
-		line-height: normal;
-	}
+		font-size: 35px;
+		padding-bottom: 10px;
 
-	.res-load .if-you-can-t-find {
-		position: relative;
-		align-self: stretch;
-		font-family: "Jost-Regular", Helvetica;
-		font-weight: 400;
-		color: #ffffff;
-		font-size: 30px;
-		letter-spacing: 0;
-		line-height: normal;
 	}
 
 	.res-load .text-wrapper-17 {
-		font-family: "Jost-Regular", Helvetica;
 		font-weight: 400;
-		color: #ffffff;
-		font-size: 30px;
-		letter-spacing: 0;
+		font-size: 20px;
 	}
 
 	.res-load .faq-frame {
 		display: flex;
-		width: 500px;
+		flex: 1; 
 		gap: 8px;
 		padding: 15px;
 		flex-direction: column;
 		align-items: flex-start;
 		position: relative;
+		font-family: "Jost-Medium", Helvetica;
+		color: #F5F0F3;
+		transition: background-color 0.3s ease;
+	}
+
+	.res-load .faq-frame:hover{
+		background-color: #2824457e;
+		border-radius: 15px;
 	}
 
 	.res-load .text-wrapper-18 {
-		position: relative;
-		width: fit-content;
-		margin-top: -1px;
-		font-family: "Jost-Medium", Helvetica;
+		max-width: 100%;
 		font-weight: 500;
-		color: #ffffff;
 		font-size: 25px;
-		letter-spacing: 0;
-		line-height: normal;
 	}
 
 	.res-load .lorem-ipsum-dolor {
-		position: relative;
-		width: 745px;
-		height: 203px;
-		margin-right: -10px;
+		max-width: 100%; 
+		width: auto; 
+		height: auto;
 	}
 
-	.res-load .p {
-		position: absolute;
-		width: 745px;
-		top: -1px;
-		left: 0;
-		font-family: "Jost-Regular", Helvetica;
-		font-weight: 400;
-		color: #ffffff;
-		font-size: 20px;
-		letter-spacing: 0;
-		line-height: normal;
-	}
-
-	.res-load .footer {
-		display: flex;
-		width: 1300px;
-		align-items: flex-start;
-		gap: 127px;
+	footer {
+		max-width: 100%;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
 		position: relative;
 		flex: 0 0 auto;
-		margin-bottom: -129px;
-		background-color: transparent;
 	}
 
 	.res-load .frame-7 {
 		display: flex;
-		align-items: center;
+		align-self: center;
 		gap: 10px;
 		padding: 10px;
 		position: relative;
@@ -1925,53 +1793,35 @@
 		flex-grow: 1;
 	}
 
+	footer .img-2{
+		width: 32px;
+		height: 32px;
+
+		
+	}
+
 	.res-load .text-wrapper-19 {
-		position: relative;
-		width: fit-content;
-		margin-top: -1px;
 		font-family: "Jost-Medium", Helvetica;
 		font-weight: 500;
-		color: #f5f0f3;
 		font-size: 20px;
-		letter-spacing: 0;
-		line-height: normal;
+	}
+
+	.res-load .text-wrapper-20 {
+		font-family: "Jost-Medium", Helvetica;
+		font-weight: 500;
+		color: #575656;
+		font-size: 15px;
 	}
 
 	.res-load .frame-8 {
 		display: flex;
-		align-items: flex-end;
-		justify-content: flex-end;
-		gap: 18px;
-		padding: 15px 20px;
+		align-items: center;
+		justify-content: center; 
+		gap: 20px;
+		padding: 10px;
 		position: relative;
 		flex: 1;
 		flex-grow: 1;
-	}
-
-	.res-load .text-wrapper-20 {
-		position: relative;
-		width: fit-content;
-		margin-top: -1px;
-		margin-left: -83px;
-		font-family: "Jost-Medium", Helvetica;
-		font-weight: 500;
-		color: #f5f0f3;
-		font-size: 20px;
-		letter-spacing: 0;
-		line-height: normal;
-	}
-
-	.res-load .text-wrapper-21 {
-		position: relative;
-		width: fit-content;
-		margin-top: -1px;
-		margin-left: -13px;
-		font-family: "Jost-Medium", Helvetica;
-		font-weight: 500;
-		color: #f5f0f3;
-		font-size: 20px;
-		letter-spacing: 0;
-		line-height: normal;
 	}
 
 	.horizontal {

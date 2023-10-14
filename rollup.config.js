@@ -75,7 +75,7 @@ export default {
 	
 	watch: {
 		clearScreen: false
-	}
+	},
 	server: {
            proxy: {'/api': 'http://localhost:5000'}
        }

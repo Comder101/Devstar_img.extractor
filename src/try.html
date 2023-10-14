@@ -1,0 +1,360 @@
+<div class="res-load">
+    <div class="home-container">
+        <div class="home-heading">
+            <span class="home-text">Extract Image</span>
+            <br />
+            <span class="home-text02">from any public website!</span>
+        </div>
+        <div class="home-searchbar">
+            <input id="urlInput" class="home-text04" type="text" placeholder="Enter any URL" />
+            <button on:click={showResults} class="home-button">Extract</button>
+        </div>
+    </div>
+    <div class="main-res-frame">
+        <div class="main-res-frame-2" id="resultsContainer" style="display: none;">
+            <div class="side-bar-sort">
+                <div class="sort-head">
+                    <label for="sortOptions">Sort By:</label>
+                </div>
+                <div class="sort-menu">
+                    <select id="sortOptions" on:change={applyFilters} style="text-align: center;">
+                        <option value="default">Default</option>
+                        <option value="sizeAsc">Image Size (Smallest to Largest)</option>
+                        <option value="sizeDesc">Image Size (Largest to Smallest)</option>
+                        <option value="fileSizeAsc">File Size (Smallest to Largest)</option>
+                        <option value="fileSizeDesc">File Size (Largest to Smallest)</option>
+                        <option value="widthAsc">Image Width (Smallest to Largest)</option>
+                        <option value="widthDesc">Image Width (Largest to Smallest)</option>
+                        <option value="heightAsc">Image Height (Smallest to Largest)</option>
+                        <option value="heightDesc">Image Height (Largest to Smallest)</option>
+                        <option value="nameAsc">Image Name (A to Z)</option>
+                        <option value="nameDesc">Image Name (Z to A)</option>
+                    </select>
+                </div>
+                <div class="filter">
+                    <div class="text-wrapper-3">Filter images by type</div>
+                    <div class="filter-menu">
+                        <div class="image-type-filter">
+                            <div class="text-wrapper-4">ICO (1)</div>
+                        </div>
+                        <div class="div-wrapper">
+                            <div class="text-wrapper-5">PNG (1)</div>
+                        </div>
+                        <div class="image-type-filter-2">
+                            <div class="text-wrapper-6">SVG (1)</div>
+                        </div>
+                        <div class="image-type-filter-3">
+                            <div class="text-wrapper-7">JPEG (1)</div>
+                        </div>
+                        <div class="image-type-filter-4">
+                            <div class="text-wrapper-8">GIF (1)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="search">
+                    <div class="text-wrapper-9">Serach for images</div>
+						<div class="url-bar">
+							<input id="search-url" class="enter-any-url" type="text" placeholder="Type to Search...."/>
+						</div>
+                </div>
+                <div class="text-wrapper-10">Download</div>
+                <div class="download-buttons">
+                    <div class="select-deselect">
+                        <div class="white-button">
+                            <img
+                                class="img"
+                                src="https://cdn-icons-png.flaticon.com/256/5291/5291043.png"
+                                alt="a"
+                            />
+                            <div class="text-wrapper-11">
+                                <button on:click={selectAll}
+                                    >Select All</button
+                                >
+                            </div>
+                        </div>
+                        <div class="white-button">
+                            <img
+                                class="img"
+                                src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-circle-outline-512.png"
+                                alt="h"
+                            />
+                            <div class="text-wrapper-11">
+                                <button on:click={deselectAll}
+                                    >Deselect All</button
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white-button-2">
+                        <img
+                            class="img"
+                            src="https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_content_paste_48px-512.png"
+                            alt="k"
+                        />
+                        <div class="copy-selected-urls">
+                            Copy selected URLs
+                        </div>
+                    </div>
+                    <div class="white-button-3">
+                        <img class="img" src="https://iihl.org/wp-content/uploads/2020/02/download-icon-white-png-1.png" alt="j" />
+                        <div class="text-wrapper-12">Download Selected</div>
+                    </div>
+                    <div class="white-button-2">
+                        <img
+                            class="img"
+                            src="https://icons.veryicon.com/png/o/miscellaneous/itsm-management/change-management.png"
+                            alt="k"
+                        />
+                        <button class="copy-selected-urls" on:click={toggleImageOrientation}
+                        >Toggle Image Orientation</button>
+                    </div>
+                </div>
+            </div>
+            <div class="res-frame">
+                <div class="result-header">
+                    <p class="showing-images-from">
+                        <span class="span">Showing images from </span>
+                        <span class="text-wrapper-13">dribble.com</span>
+                    </p>
+                </div>
+                <div class="horizontal">
+                    <div class="image-frame-vertical" data-selected="false">
+                        <div class="frame-2">
+                            <img
+                                class="rectangle"
+                                src="./images/image.jpg"
+                                alt="image1"
+                                id="imageToCopy"
+                            />
+                            <div class="text-wrapper-14">Image_name</div>
+                        </div>
+                        <div class="frame-3">
+                            <div class="file-size">
+                                <div class="text-wrapper-15">980 KB</div>
+                            </div>
+                            <div class="image-type">
+                                <div class="text-wrapper-4">ICO</div>
+                            </div>
+                            <div class="frame-4">
+                                <button on:click={copyImageUrl}
+                                    >Copy Image URL</button
+                                >
+                                <button
+                                    on:click={() =>
+                                        downloadImage(
+                                            "./images/image.jpg",
+                                            "image.jpg"
+                                        )}>Download</button
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="vertical" style="display: none;">
+                    <!-- Image results here (you can duplicate this block as needed) -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div><div class="box">
+    <div class="image-frame">
+        <div class="property-hover">
+            <div
+                class="size-select"
+                data-selected="false"
+            >
+                <div class="select" />
+                <div class="image-dim">
+                    <div class="text-wrapper">
+                        1600 x 1200
+                    </div>
+                </div>
+            </div>
+            <div class="image-main">
+                <img
+                    class="rectangle"
+                    src="./images/image.jpg"
+                    alt="image1"
+                />
+                <div class="div">Image_name</div>
+            </div>
+            <div class="image-tail">
+                <div class="image-type">
+                    <div class="div-wrapper">
+                        <div class="text-wrapper-2">
+                            ICO
+                        </div>
+                    </div>
+                    <div class="file-size">
+                        <div class="text-wrapper-3">
+                            980 KB
+                        </div>
+                    </div>
+                </div>
+                <div class="frame">
+                    <button on:click={copyImageUrl}
+                        >Copy Image URL</button
+                    >
+                    <button
+                        on:click={() =>
+                            downloadImage(
+                                "./images/image.jpg",
+                                "image.jpg"
+                            )}>Download</button
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="property-selected">
+            <div
+                class="size-select"
+                data-selected="false"
+            >
+                <div class="image-dim">
+                    <div class="text-wrapper">
+                        1600 x 1200
+                    </div>
+                </div>
+            </div>
+            <div class="image-main">
+                <img
+                    class="rectangle"
+                    src="./images/image.jpg"
+                    alt="image1"
+                />
+                <div class="div">Image_name</div>
+            </div>
+            <div class="image-tail">
+                <div class="image-type">
+                    <div class="div-wrapper">
+                        <div class="text-wrapper-2">
+                            ICO
+                        </div>
+                    </div>
+                    <div class="file-size">
+                        <div class="text-wrapper-3">
+                            980 KB
+                        </div>
+                    </div>
+                </div>
+                <div class="frame">
+                    <button on:click={copyImageUrl}
+                        >Copy Image URL</button
+                    >
+                    <button
+                        on:click={() =>
+                            downloadImage(
+                                "./images/image.jpg",
+                                "image.jpg"
+                            )}>Download</button
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="property-default">
+            <div
+                class="size-select"
+                data-selected="false"
+            >
+                <div class="image-dim">
+                    <div class="text-wrapper">
+                        1600 x 1200
+                    </div>
+                </div>
+            </div>
+            <div class="image-main">
+                <img
+                    class="rectangle"
+                    src="./images/image.jpg"
+                    alt="image1"
+                />
+                <div class="div">Image_name</div>
+            </div>
+            <div class="image-tail">
+                <div class="image-type">
+                    <div class="div-wrapper">
+                        <div class="text-wrapper-2">
+                            ICO
+                        </div>
+                    </div>
+                    <div class="file-size">
+                        <div class="text-wrapper-3">
+                            980 KB
+                        </div>
+                    </div>
+                </div>
+                <div class="frame">
+                    <button on:click={copyImageUrl}
+                        >Copy Image URL</button
+                    >
+                    <button
+                        on:click={() =>
+                            downloadImage(
+                                "./images/image.jpg",
+                                "image.jpg"
+                            )}>Download</button
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="faq">
+    <div class="faq-header">
+        <div class="text-wrapper-16">Frequently asked questions</div>
+        <p class="if-you-can-t-find">
+            <span class="text-wrapper-17">If you can’t find what you’re looking for, write us a message and we'll get back to you.</span>
+        </p>
+    </div>
+    <div class="faq-frame">
+        <div class="text-wrapper-18">What is extract.pics?</div>
+        <div class="lorem-ipsum-dolor">
+            <p class="p">
+                Lorem ipsum dolor sit amet consectetur. Orci
+                consequat congue orci etiam mattis aliquam tincidunt
+                felis porttitor. Tortor turpis aliquam ullamcorper
+                nam erat consequat. Et amet pellentesque turpis eget
+                ac justo eu gravida. Sed sodales feugiat mauris
+                aliquam blandit justo bibendum proin. Pretium risus
+                quis varius vestibulum sed leo cras morbi. Cras
+                lectus ut mattis ligula pretium lacus commodo.
+                Ullamcorper nam consequat morbi eros lorem sit. Et
+                ullamcorper consequat sit nunc eget quam. Lacus
+                massa magna scelerisque ac interdum.
+            </p>
+        </div>
+    </div>
+    <div class="faq-frame">
+        <div class="text-wrapper-18">What is extract.pics?</div>
+        <div class="lorem-ipsum-dolor">
+            <p class="p">
+                Lorem ipsum dolor sit amet consectetur. Orci
+                consequat congue orci etiam mattis aliquam tincidunt
+                felis porttitor. Tortor turpis aliquam ullamcorper
+                nam erat consequat. Et amet pellentesque turpis eget
+                ac justo eu gravida. Sed sodales feugiat mauris
+                aliquam blandit justo bibendum proin. Pretium risus
+                quis varius vestibulum sed leo cras morbi. Cras
+                lectus ut mattis ligula pretium lacus commodo.
+                Ullamcorper nam consequat morbi eros lorem sit. Et
+                ullamcorper consequat sit nunc eget quam. Lacus
+                massa magna scelerisque ac interdum.
+            </p>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="frame-7">
+        <img class="img-2" src="https://cdn-icons-png.flaticon.com/512/106/106852.png" alt="" />
+        <div class="text-wrapper-19">image-extract</div>
+    </div>
+    <div class="frame-8">
+        <div class="text-wrapper-20">Status</div>
+        <div class="text-wrapper-21">Changelog</div>
+        <div class="text-wrapper-19">Documentation</div>
+        <div class="text-wrapper-19">Privacy and Cookie</div>
+        <div class="text-wrapper-19">Terms of service</div>
+    </div>
+</footer>
