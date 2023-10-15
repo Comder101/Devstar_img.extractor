@@ -1,10 +1,15 @@
 <script>
 	let url = "";
 	let imgUrls = [];
+	let loading = false;
+	let error = null;
 
 	const scrape = async () => {
+		loading = true;
+		error = null;
+
 		try {
-			const response = await fetch("http://localhost:3001/api/scrape", {
+			const response = await fetch("http://localhost:5000/api/scrape", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -16,10 +21,13 @@
 			if (data.success) {
 				imgUrls = data.imgUrls;
 			} else {
-				console.error(data.error);
+				error = data.error;
 			}
 		} catch (error) {
 			console.error("Error:", error);
+			error = "An error occurred during the scraping process.";
+		} finally {
+			loading = false;
 		}
 	};
 
@@ -254,13 +262,19 @@
 	<label for="url">Enter URL:</label>
 	<input type="text" id="url" bind:value={url} />
 
-	<button on:click={scrape}>Scrape Images</button>
+	<button on:click={scrape} disabled={loading}>
+		{loading ? "Scraping..." : "Scrape Images"}
+	</button>
+
+	{#if error}
+		<p style="color: red;">Error: {error}</p>
+	{/if}
 
 	{#if imgUrls.length > 0}
 		<h2>Image URLs:</h2>
 		<ul>
 			{#each imgUrls as imgUrl}
-				<li>{imgUrl}</li>
+				<li><a href={imgUrl} target="_blank">{imgUrl}</a></li>
 			{/each}
 		</ul>
 	{/if}
