@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width ,initial-scale=1.0 ">
+<title>Image Extractor</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+<link rel="stylesheet"href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+</head>
+<body>
+
+<section class="header ">
+    <nav>
+        <a href="home.html"><img src="image_extractor.png"></a>
+        <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()" ></i>
+            <ul>
+                <li><a href="home.html" >HOME</a></li>
+                <li><a href="#">HELP CENTER</a></li>
+               <li><a href="">ABOUT US</a></li>
+            </ul>
+         </div>
+          <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+<div class="text-box">
+    <h1><strong>Image extractor </strong></h1>
+    <br>
+    <h3>Effortless image extraction from webpages. Your visuals, simplified.</h3>
+    <div class="image upload">
+        <br>
+        <input type="text" id="imageLink" placeholder="Enter image link...">
+        <button onclick="searchImage()">Extract</button>
+    
+        <p id="result"></p>
+        <p id="error"></p>
+    </div>
+    
+</div>
+</section>
+<hr>
+<br>
+<br>
+
+
+<!----------------Services---------------------->
+<section class="services">
+    <br>
+    <br>
+    <h1>Why Choose Us?</h1>
+    <br>
+    <br>
+    <br>
+     <div class="row">
+        <div class="services-col">
+            <img src="1_serv.png">
+            <h3>Efficiency</h3>
+            <br>
+            <h5>Save time and effort with our automated image extraction process.</h5>
+        </div>
+        <div class="services-col">
+            <img src="2_serv.png">
+            <h3>User-Friendly</h3>
+            </a>
+            <br>
+            <h5>Our intuitive interface makes the process accessible to all.
+            </h5>
+        </div>
+        <div class="services-col">
+            <img src="3_serv.png">
+            <h3>Volunteer</h3>
+            </a>
+            <br>
+            <h5>Tailor your image extraction settings to suit your needs.</h5>
+        </div>
+     </div>
+
+</section>
+
+<!-------Frequently asked questions-------->
+<hr>
+<section class="FAQ">
+        <h2>Frequently Asked Questions:</h2>
+        <br>
+    <div>
+        <h3>What is extract.pics?</h3>
+        <p>
+            Extract.pics is an easy to use tool that allows you to extract, view and download images from any public website. Simply paste the URL of the website into the input field and click "Extract" to start the process. After a few seconds, you will see most or even all of the images found on the website.
+        </p>
+    </div>
+    <br>
+    <br>
+
+    <div>
+        <h3>How can I find specific images?</h3>
+        <p>
+            You can view the found images in a grid or list and explore them by sorting them by name, type, dimensions, width, height or the actual file size. Additionally, you can search for images by their name, size or type/file format. This makes it really easy to find exactly the images you need.
+        </p>
+    </div>
+    <br>
+    <br>
+    <div>
+        <h3>Can I download multiple images at once?</h3>
+        <p>
+            Of course, you can select them by clicking the images and then use the "Download selected" button on the left to download all selected images in a ZIP file. This can take some time depending on how many images you selected. Note that there is a chance that some images cannot be downloaded and won't be included in the ZIP file.
+        </p>
+    </div>
+    <br>
+    <br>
+    <div>
+        <h3>Why might the extraction process not work?</h3>
+        <p>
+            There are several reasons why the extraction might fail. The website you entered might not be publicly accessible or it might be protected by a login. Very slow or large websites might also cause issues. Additionally, if there are a lot of people using extract.pics at the same time, it can cause performance issues on our side. In this case, you should try again later or try a different website. We are continuously working on improving the performance of our service.
+        </p>
+    </div>
+    <br>
+    <br>
+</section>
+
+<!-------Result Sorting-------->
+
+<section>
+    <div class="main-container" style="display: none;">
+        <div class="sort-container">
+            <div class="sort">
+                <h3>Sort by: </h3>
+                <div class="sort-menu">
+                    <select id="sortOptions" onchange="applyFilters()">
+                        <option value="default">Default</option>
+                        <option value="heightAsc">Image Height (Smallest to Largest)</option>
+                        <option value="heightDesc">Image Height (Largest to Smallest)</option>
+                        <option value="nameAsc">Image Name (A to Z)</option>
+                        <option value="nameDesc">Image Name (Z to A)</option>
+                        <option value="sizeAsc">Image Size (Smallest to Largest)</option>
+                        <option value="sizeDesc">Image Size (Largest to Smallest)</option>
+                        <option value="fileSizeAsc">File Size (Smallest to Largest)</option>
+                        <option value="fileSizeDesc">File Size (Largest to Smallest)</option>
+                        <option value="widthAsc">Image Width (Smallest to Largest)</option>
+                        <option value="widthDesc">Image Width (Largest to Smallest)</option>
+                    </select>
+                </div>
+                <div class="filter">
+                    <button onclick="filterByExtension('ico')">ICO</button>
+                    <button onclick="filterByExtension('png')">PNG</button>
+                    <button onclick="filterByExtension('svg')">SVG</button>
+                    <button onclick="filterByExtension('jpeg')">JPEG</button>
+                    <button onclick="filterByExtension('gif')">GIF</button>
+                </div>
+                <div class="download-buttons">
+                    <button class="white-button" onclick="selectAll()">
+                        <img src="https://static.thenounproject.com/png/542179-200.png" alt="select all"/>
+                        Select All
+                    </button>
+                    <button class="white-button" onclick="deselectAll()">
+                        <img src="https://static.thenounproject.com/png/1461827-200.png" alt="deselect all"/>
+                        Deselect All
+                    </button>
+                    <button class="dark-button" onclick="">
+                        <img src="https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_content_paste_48px-512.png" alt="deselect all"/>
+                        Copy Selected URLs
+                    </button>
+                    <button class= "white-button" onclick="">
+                        <img src="https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_content_paste_48px-512.png" alt="deselect all"/>
+                        Copy Selected URLs
+                    </button>
+                    <button class="dark-button" onclick="toggleImageOrientation()">
+                        <img src="https://icons.veryicon.com/png/o/miscellaneous/itsm-management/change-management.png" alt="deselect all"/>
+                        Toggle Orientation
+                    </button>
+                </div>
+            </div>
+        </div>
+
+<!-------Horizontal Result Frame-------->
+
+        <div class="result-container">
+            <div class="result-url">
+                <span>Showing images from </span>
+                <span id= 'site-show'>??</span>
+            </div>
+            <div class="horizontal">
+                <div class='frame' data-selected="false">
+                    <div class="img-name">
+                        <img src="https://www.hbruvry.com/wp-content/uploads/2023/05/romantic-futurism-thumbnail-1080p.jpg" alt="image-result">
+                        <h2 id="image-name">Image name</h2>
+                    </div>
+                    <div class="info">
+                        <div class="img-info">
+                            <div class="img-size" id="img-size">980 KB</div>
+                            <div class="img-type" id="img-type">ICO</div>
+                        </div>
+                        <div class="buttons">
+                            <button onclick="copyImageURL()">Copy Image URL</button>
+                            <button onclick="downloadImage()">Download</button>
+                        </div>
+                    </div>
+                </div>
+                <div class='frame' data-selected="false">
+                    <div class="img-name">
+                        <img src="https://www.hbruvry.com/wp-content/uploads/2023/05/romantic-futurism-thumbnail-1080p.jpg" alt="image-result">
+                        <h2 id="image-name">Image name</h2>
+                    </div>
+                    <div class="info">
+                        <div class="img-info">
+                            <div class="img-size" id="img-size">980 KB</div>
+                            <div class="img-type" id="img-type">ICO</div>
+                        </div>
+                        <div class="buttons">
+                            <button onclick="copyImageURL()">Copy Image URL</button>
+                            <button onclick="downloadImage()">Download</button>
+                        </div>
+                    </div>
+                </div>
+                <div class='frame' data-selected="false">
+                    <div class="img-name">
+                        <img src="https://www.hbruvry.com/wp-content/uploads/2023/05/romantic-futurism-thumbnail-1080p.jpg" alt="image-result">
+                        <h2 id="image-name">Image name</h2>
+                    </div>
+                    <div class="info">
+                        <div class="img-info">
+                            <div class="img-size" id="img-size">980 KB</div>
+                            <div class="img-type" id="img-type">ICO</div>
+                        </div>
+                        <div class="buttons">
+                            <button onclick="copyImageURL()">Copy Image URL</button>
+                            <button onclick="downloadImage()">Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--------Footer-------->
+
+<section class="aboutus">
+    <hr>
+    <h3>About Us</h3>
+<h4>Unleashing the Power of Visuals</h4>
+<p>
+    At ImageExtractorPro, we are passionate about the world of visuals. Our mission is to make the process of gathering images from the web more accessible and efficient for individuals, designers, content creators, and researchers.
+    With a team of dedicated professionals, we've created a platform that simplifies image extraction. We believe that visuals are a powerful tool for communication, creativity, and knowledge sharing. That's why we've made it our goal to empower you with the tools to collect and use images effortlessly.
+    Our platform allows you to extract images from web pages, URLs, and online documents, providing a seamless experience for your visual content needs. We're committed to helping you save time and energy so you can focus on what matters most: your projects, research, or creative endeavors.
+    Join us in the visual journey, and let's make the digital world a more colorful and expressive place, one image at a time.
+</p>
+
+
+</section>
+
+<section class="footer">
+    <h3>Contact Us</h3>
+    <div class="mail">
+       <h6>dvstrimgextractor@gmail.com</h6></a>
+        <h5>+91 12345678910</h5></a>
+    </div>
+   
+    <div class="credit">
+        <p>Designed By: dvstr-image-extractor</p>
+    </div>
+    <div class="copyright">
+        <p>Some images used under license from Shutterstock, Google. &copy; 2023 Pawsome. All rights reserved.</p>
+    </div>
+
+
+  
+</section>
+
+
+
+<script>
+    var navLinks = document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right = "0";
+    }
+    function hideMenu(){
+        navLinks.style.right = "-200px";
+    }
+</script>
+
+<script>
+    function searchImage() {
+    var imageLink = document.getElementById('imageLink').value;
+    var resultContainer = document.querySelector(".main-container");
+    var serviceContainer = document.querySelector(".services");
+    var faqContainer = document.querySelector(".FAQ");
+    if (imageLink.trim() === "") {
+        document.getElementById('error').innerHTML = "Error: Please enter a valid image link.";
+        resultContainer.style.display = "none";
+        serviceContainer.style.display = "block";
+        faqContainer.style.display = "block";
+        return;
+    }
+    else {
+        document.getElementById('error').innerHTML = "";
+        resultContainer.style.display = "block";
+        serviceContainer.style.display = "none";
+        faqContainer.style.display = "none";
+        var siteshow = document.getElementById("site-show");
+        siteshow.innerText = imageLink;
+    }
+    // For demonstration purposes, we'll simply display the link
+    document.getElementById('result').innerHTML = `You entered: <a href="${imageLink}" target="_blank">${imageLink}</a>`;
+}
+</script>
+<script>
+    function applyFilters() {
+        const sortOption = document.getElementById("sortOptions").value;
+        const images = document.querySelector('.frame')
+
+        switch (sortOption) {
+            case "sizeAsc":
+                sortImagesBySize(images, true);
+                break;
+            case "sizeDesc":
+                sortImagesBySize(images, false);
+                break;
+            case "fileSizeAsc":
+                sortImagesByFileSize(images, true);
+                break;
+            case "fileSizeDesc":
+                sortImagesByFileSize(images, false);
+                break;
+            case "widthAsc":
+                sortImagesByDimension(images, "width", true);
+                break;
+            case "widthDesc":
+                sortImagesByDimension(images, "width", false);
+                break;
+            case "heightAsc":
+                sortImagesByDimension(images, "height", true);
+                break;
+            case "heightDesc":
+                sortImagesByDimension(images, "height", false);
+                break;
+            case "nameAsc":
+                sortImagesByName(images, true);
+                break;
+            case "nameDesc":
+                sortImagesByName(images, false);
+                break;
+            default:
+                break;
+        }
+    }
+    function sortImagesBySize(images, ascending) {
+    const imagesArray = Array.from(images);
+    imagesArray.sort((a, b) => {
+        const sizeA = a.querySelector('.img-size').innerText;
+        const sizeB = b.querySelector('.img-size').innerText;
+        return ascending ? sizeA - sizeB : sizeB - sizeA;
+    });
+    const imagesContainer = document.querySelector('.horizontal');
+    imagesContainer.innerHTML = '';
+    imagesArray.forEach(image => imagesContainer.appendChild(image));
+}
+
+function sortImagesByFileSize(images, ascending) {
+    const imagesArray = Array.from(images);
+    imagesArray.sort((a, b) => {
+        const sizeA = parseFloat(a.querySelector('.img-size').innerText);
+        const sizeB = parseFloat(b.querySelector('.img-size').innerText);
+        return ascending ? sizeA - sizeB : sizeB - sizeA;
+    });
+    const imagesContainer = document.querySelector('.horizontal');
+    imagesContainer.innerHTML = '';
+    imagesArray.forEach(image => imagesContainer.appendChild(image));
+}
+
+function sortImagesByDimension(images, dimension, ascending) {
+    const imagesArray = Array.from(images);
+    imagesArray.sort((a, b) => {
+        const dimA = parseFloat(a.querySelector('.img-' + dimension).innerText);
+        const dimB = parseFloat(b.querySelector('.img-' + dimension).innerText);
+        return ascending ? dimA - dimB : dimB - dimA;
+    });
+    const imagesContainer = document.querySelector('.horizontal');
+    imagesContainer.innerHTML = '';
+    imagesArray.forEach(image => imagesContainer.appendChild(image));
+}
+
+function sortImagesByName(images, ascending) {
+    const imagesArray = Array.from(images);
+    imagesArray.sort((a, b) => {
+        const nameA = a.querySelector('#image-name').innerText.toLowerCase();
+        const nameB = b.querySelector('#image-name').innerText.toLowerCase();
+        return ascending ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+    });
+    const imagesContainer = document.querySelector('.horizontal');
+    imagesContainer.innerHTML = '';
+    imagesArray.forEach(image => imagesContainer.appendChild(image));
+}
+    function filterByExtension(extension) {
+    const images = document.querySelectorAll('.frame');
+    images.forEach((image) => {
+        const imgType = image.querySelector('.img-type').innerText.toLowerCase();
+        if (extension === 'all' || imgType === extension.toLowerCase()) {
+            image.style.display = 'block';
+        } else {
+            image.style.display = 'none';
+        }
+    });
+}
+
+    function selectAll() {
+    const images = document.querySelectorAll('.frame');
+    images.forEach((image) => {
+        image.dataset.selected = 'true';
+        image.style.border = '2px solid blue';
+    });
+}
+    function deselectAll() {
+    const images = document.querySelectorAll('.frame');
+    images.forEach((image) => {
+        image.dataset.selected = 'false';
+        image.style.border = '1px solid #ccc';
+    });
+}
+
+    function toggleImageOrientation() {
+    const horizontalImage = document.querySelector('.horizontal');
+    const verticalImage = document.querySelector('.vertical');
+    
+    if (horizontalImage.style.display === 'block') {
+        horizontalImage.style.display = 'none';
+        verticalImage.style.display = 'block';
+    } else {
+        horizontalImage.style.display = 'block';
+        verticalImage.style.display = 'none';
+    }
+}
+    function copyImageURL(){
+        var image = document.getElementById("imageToCopy");
+        // Ensure an image is selected
+        if (image && image.src) {
+            var imageUrl = image.src;
+            copyToClipboard(imageUrl);
+            alert("Image URL copied to clipboard: " + imageUrl);
+        }
+    }
+    function downloadImage(){
+        // Implement downloadImage logic
+    }
+    function copyToClipboard(){
+        var textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+    }
+</script>
+
+
+</body>
+</html>
