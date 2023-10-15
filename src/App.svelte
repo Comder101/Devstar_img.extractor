@@ -32,7 +32,7 @@
 	};
 
 	function showResults() {
-		var urlInput = document.getElementById("urlInput").value;
+		var urlInput = document.getElementById("url").value;
 		if (urlInput) {
 			// Assuming the 'mainresframe-container' is the div you want to display
 			var resultsContainer = document.getElementById("resultsContainer");
@@ -256,30 +256,6 @@
 	}
 </script>
 
-<main>
-	<h1>Image Scraper</h1>
-
-	<label for="url">Enter URL:</label>
-	<input type="text" id="url" bind:value={url} />
-
-	<button on:click={scrape} disabled={loading}>
-		{loading ? "Scraping..." : "Scrape Images"}
-	</button>
-
-	{#if error}
-		<p style="color: red;">Error: {error}</p>
-	{/if}
-
-	{#if imgUrls.length > 0}
-		<h2>Image URLs:</h2>
-		<ul>
-			{#each imgUrls as imgUrl}
-				<li><a href={imgUrl} target="_blank">{imgUrl}</a></li>
-			{/each}
-		</ul>
-	{/if}
-</main>
-
 <div class="header">
 	<div class="image-extractor">
 		<!-- <img class="image" src="img/image.png" alt="1" /> -->
@@ -319,16 +295,25 @@
 				<div class="home-searchbar">
 					<div class="home-urlbar">
 						<input
-							id="urlInput"
 							class="home-text04"
-							type="text"
 							placeholder="Enter any URL"
+							type="text"
+							id="url"
+							bind:value={url}
 						/>
 					</div>
 				</div>
-				<button on:click={showResults} class="home-button">
-					<span class="home-text06"><span>Extract</span></span>
+				<button
+					on:click={scrape}
+					disabled={loading}
+					on:click={showResults}
+					class="home-button"
+				>
+					{loading ? "Scraping..." : "Scrape Images"}
 				</button>
+				{#if error}
+					<p style="color: red;">Error: {error}</p>
+				{/if}
 			</div>
 		</div>
 		<div class="main-res-frame">
@@ -466,489 +451,115 @@
 						>
 					</div>
 					<div class="horizontal">
-						<div class="image-frame-vertical" data-selected="false">
-							<div class="frame-2">
-								<img
-									class="rectangle"
-									src="./images/image.jpg"
-									alt="image1"
-									id="imageToCopy"
-								/>
-								<div class="text-wrapper-14">Image_name</div>
-							</div>
-							<div class="frame-3">
-								<div class="file-size">
-									<div class="text-wrapper-15">980 KB</div>
-								</div>
-								<div class="image-type">
-									<div class="text-wrapper-4">ICO</div>
-								</div>
-								<div class="frame-4">
-									<button on:click={copyImageUrl}
-										>Copy Image URL</button
+						{#if imgUrls.length > 0}
+							{#each imgUrls as imgUrl}
+								<!-- <li>
+									<a href={imgUrl} target="_blank">{imgUrl}</a
 									>
-									<button
-										on:click={() =>
-											downloadImage(
-												"./images/image.jpg",
-												"image.jpg"
-											)}>Download</button
-									>
+								</li> -->
+								<div
+									class="image-frame-vertical"
+									data-selected="false"
+								>
+									<div class="frame-2">
+										<img
+											class="rectangle"
+											src={imgUrl}
+											alt="image1"
+											id="imageToCopy"
+										/>
+										<div class="text-wrapper-14">
+											Image_name
+										</div>
+									</div>
+									<div class="frame-3">
+										<div class="file-size">
+											<div class="text-wrapper-15">
+												980 KB
+											</div>
+										</div>
+										<div class="image-type">
+											<div class="text-wrapper-4">
+												ICO
+											</div>
+										</div>
+										<div class="frame-4">
+											<button on:click={copyImageUrl}
+												>Copy Image URL</button
+											>
+											<button
+												on:click={() =>
+													downloadImage(
+														{ imgUrl },
+														{ imgUrl }
+													)}>Download</button
+											>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="image-frame-vertical" data-selected="false">
-							<div class="frame-2">
-								<img
-									class="rectangle"
-									src="./images/image.jpg"
-									alt="image1"
-									id="imageToCopy"
-								/>
-								<div class="text-wrapper-14">Image_name</div>
-							</div>
-							<div class="frame-3">
-								<div class="file-size">
-									<div class="text-wrapper-15">980 KB</div>
-								</div>
-								<div class="image-type">
-									<div class="text-wrapper-4">ICO</div>
-								</div>
-								<div class="frame-4">
-									<button on:click={copyImageUrl}
-										>Copy Image URL</button
-									>
-									<button
-										on:click={() =>
-											downloadImage(
-												"./images/image.jpg",
-												"image.jpg"
-											)}>Download</button
-									>
-								</div>
-							</div>
-						</div>
-						<div class="image-frame-vertical" data-selected="false">
-							<div class="frame-2">
-								<img
-									class="rectangle"
-									src="./images/image.jpg"
-									alt="image1"
-									id="imageToCopy"
-								/>
-								<div class="text-wrapper-14">Image_name</div>
-							</div>
-							<div class="frame-3">
-								<div class="file-size">
-									<div class="text-wrapper-15">980 KB</div>
-								</div>
-								<div class="image-type">
-									<div class="text-wrapper-4">ICO</div>
-								</div>
-								<div class="frame-4">
-									<button on:click={copyImageUrl}
-										>Copy Image URL</button
-									>
-									<button
-										on:click={() =>
-											downloadImage(
-												"./images/image.jpg",
-												"image.jpg"
-											)}>Download</button
-									>
-								</div>
-							</div>
-						</div>
-						<div class="image-frame-vertical" data-selected="false">
-							<div class="frame-2">
-								<img
-									class="rectangle"
-									src="./images/image.jpg"
-									alt="image1"
-									id="imageToCopy"
-								/>
-								<div class="text-wrapper-14">Image_name</div>
-							</div>
-							<div class="frame-3">
-								<div class="file-size">
-									<div class="text-wrapper-15">980 KB</div>
-								</div>
-								<div class="image-type">
-									<div class="text-wrapper-4">ICO</div>
-								</div>
-								<div class="frame-4">
-									<button on:click={copyImageUrl}
-										>Copy Image URL</button
-									>
-									<button
-										on:click={() =>
-											downloadImage(
-												"./images/image.jpg",
-												"image.jpg"
-											)}>Download</button
-									>
-								</div>
-							</div>
-						</div>
-						<div class="image-frame-vertical" data-selected="false">
-							<div class="frame-2">
-								<img
-									class="rectangle"
-									src="./images/image.jpg"
-									alt="image1"
-									id="imageToCopy"
-								/>
-								<div class="text-wrapper-14">Image_name</div>
-							</div>
-							<div class="frame-3">
-								<div class="file-size">
-									<div class="text-wrapper-15">980 KB</div>
-								</div>
-								<div class="image-type">
-									<div class="text-wrapper-4">ICO</div>
-								</div>
-								<div class="frame-4">
-									<button on:click={copyImageUrl}
-										>Copy Image URL</button
-									>
-									<button
-										on:click={() =>
-											downloadImage(
-												"./images/image.jpg",
-												"image.jpg"
-											)}>Download</button
-									>
-								</div>
-							</div>
-						</div>
-						<div class="image-frame-vertical" data-selected="false">
-							<div class="frame-2">
-								<img
-									class="rectangle"
-									src="./images/image.jpg"
-									alt="image1"
-									id="imageToCopy"
-								/>
-								<div class="text-wrapper-14">Image_name</div>
-							</div>
-							<div class="frame-3">
-								<div class="file-size">
-									<div class="text-wrapper-15">980 KB</div>
-								</div>
-								<div class="image-type">
-									<div class="text-wrapper-4">ICO</div>
-								</div>
-								<div class="frame-4">
-									<button on:click={copyImageUrl}
-										>Copy Image URL</button
-									>
-									<button
-										on:click={() =>
-											downloadImage(
-												"./images/image.jpg",
-												"image.jpg"
-											)}>Download</button
-									>
-								</div>
-							</div>
-						</div>
-						<div class="image-frame-vertical" data-selected="false">
-							<div class="frame-2">
-								<img
-									class="rectangle"
-									src="./images/image.jpg"
-									alt="image1"
-									id="imageToCopy"
-								/>
-								<div class="text-wrapper-14">Image_name</div>
-							</div>
-							<div class="frame-3">
-								<div class="file-size">
-									<div class="text-wrapper-15">980 KB</div>
-								</div>
-								<div class="image-type">
-									<div class="text-wrapper-4">ICO</div>
-								</div>
-								<div class="frame-4">
-									<button on:click={copyImageUrl}
-										>Copy Image URL</button
-									>
-									<button
-										on:click={() =>
-											downloadImage(
-												"./images/image.jpg",
-												"image.jpg"
-											)}>Download</button
-									>
-								</div>
-							</div>
-						</div>
-						<div class="image-frame-vertical" data-selected="false">
-							<div class="frame-2">
-								<img
-									class="rectangle"
-									src="./images/image.jpg"
-									alt="image1"
-									id="imageToCopy"
-								/>
-								<div class="text-wrapper-14">Image_name</div>
-							</div>
-							<div class="frame-3">
-								<div class="file-size">
-									<div class="text-wrapper-15">980 KB</div>
-								</div>
-								<div class="image-type">
-									<div class="text-wrapper-4">ICO</div>
-								</div>
-								<div class="frame-4">
-									<button on:click={copyImageUrl}
-										>Copy Image URL</button
-									>
-									<button
-										on:click={() =>
-											downloadImage(
-												"./images/image.jpg",
-												"image.jpg"
-											)}>Download</button
-									>
-								</div>
-							</div>
-						</div>
-						<div class="image-frame-vertical" data-selected="false">
-							<div class="frame-2">
-								<img
-									class="rectangle"
-									src="./images/image.jpg"
-									alt="image1"
-									id="imageToCopy"
-								/>
-								<div class="text-wrapper-14">Image_name</div>
-							</div>
-							<div class="frame-3">
-								<div class="file-size">
-									<div class="text-wrapper-15">980 KB</div>
-								</div>
-								<div class="image-type">
-									<div class="text-wrapper-4">ICO</div>
-								</div>
-								<div class="frame-4">
-									<button on:click={copyImageUrl}
-										>Copy Image URL</button
-									>
-									<button
-										on:click={() =>
-											downloadImage(
-												"./images/image.jpg",
-												"image.jpg"
-											)}>Download</button
-									>
-								</div>
-							</div>
-						</div>
-						<div class="image-frame-vertical" data-selected="false">
-							<div class="frame-2">
-								<img
-									class="rectangle"
-									src="./images/image.jpg"
-									alt="image1"
-									id="imageToCopy"
-								/>
-								<div class="text-wrapper-14">Image_name</div>
-							</div>
-							<div class="frame-3">
-								<div class="file-size">
-									<div class="text-wrapper-15">980 KB</div>
-								</div>
-								<div class="image-type">
-									<div class="text-wrapper-4">ICO</div>
-								</div>
-								<div class="frame-4">
-									<button on:click={copyImageUrl}
-										>Copy Image URL</button
-									>
-									<button
-										on:click={() =>
-											downloadImage(
-												"./images/image.jpg",
-												"image.jpg"
-											)}>Download</button
-									>
-								</div>
-							</div>
-						</div>
-						<div class="image-frame-vertical" data-selected="false">
-							<div class="frame-2">
-								<img
-									class="rectangle"
-									src="./images/image.jpg"
-									alt="image1"
-									id="imageToCopy"
-								/>
-								<div class="text-wrapper-14">Image_name</div>
-							</div>
-							<div class="frame-3">
-								<div class="file-size">
-									<div class="text-wrapper-15">980 KB</div>
-								</div>
-								<div class="image-type">
-									<div class="text-wrapper-4">ICO</div>
-								</div>
-								<div class="frame-4">
-									<button on:click={copyImageUrl}
-										>Copy Image URL</button
-									>
-									<button
-										on:click={() =>
-											downloadImage(
-												"./images/image.jpg",
-												"image.jpg"
-											)}>Download</button
-									>
-								</div>
-							</div>
-						</div>
+							{/each}
+						{/if}
 					</div>
 					<div class="vertical" style="display: none;">
 						<div class="box">
 							<div class="image-frame">
 								<div class="property-hover">
-									<div
-										class="size-select"
-										data-selected="false"
-									>
-										<div class="select" />
-										<div class="image-dim">
-											<div class="text-wrapper">
-												1600 x 1200
-											</div>
-										</div>
-									</div>
-									<div class="image-main">
-										<img
-											class="rectangle"
-											src="./images/image.jpg"
-											alt="image1"
-										/>
-										<div class="div">Image_name</div>
-									</div>
-									<div class="image-tail">
-										<div class="image-type">
-											<div class="div-wrapper">
-												<div class="text-wrapper-2">
-													ICO
+									{#if imgUrls.length > 0}
+										{#each imgUrls as imgUrl}
+											<div
+												class="size-select"
+												data-selected="false"
+											>
+												<div class="select" />
+												<div class="image-dim">
+													<div class="text-wrapper">
+														1600 x 1200
+													</div>
 												</div>
 											</div>
-											<div class="file-size">
-												<div class="text-wrapper-3">
-													980 KB
+											<div class="image-main">
+												<img
+													class="rectangle"
+													src={imgUrl}
+													alt={imgUrl}
+												/>
+												<div class="div">
+													Image_name
 												</div>
 											</div>
-										</div>
-										<div class="frame">
-											<button on:click={copyImageUrl}
-												>Copy Image URL</button
-											>
-											<button
-												on:click={() =>
-													downloadImage(
-														"./images/image.jpg",
-														"image.jpg"
-													)}>Download</button
-											>
-										</div>
-									</div>
-								</div>
-								<div class="property-selected">
-									<div
-										class="size-select"
-										data-selected="false"
-									>
-										<div class="image-dim">
-											<div class="text-wrapper">
-												1600 x 1200
-											</div>
-										</div>
-									</div>
-									<div class="image-main">
-										<img
-											class="rectangle"
-											src="./images/image.jpg"
-											alt="image1"
-										/>
-										<div class="div">Image_name</div>
-									</div>
-									<div class="image-tail">
-										<div class="image-type">
-											<div class="div-wrapper">
-												<div class="text-wrapper-2">
-													ICO
+											<div class="image-tail">
+												<div class="image-type">
+													<div class="div-wrapper">
+														<div
+															class="text-wrapper-2"
+														>
+															ICO
+														</div>
+													</div>
+													<div class="file-size">
+														<div
+															class="text-wrapper-3"
+														>
+															980 KB
+														</div>
+													</div>
+												</div>
+												<div class="frame">
+													<button
+														on:click={copyImageUrl}
+														>Copy Image URL</button
+													>
+													<button
+														on:click={() =>
+															downloadImage(
+																{ imgUrl },
+																{ imgUrl }
+															)}>Download</button
+													>
 												</div>
 											</div>
-											<div class="file-size">
-												<div class="text-wrapper-3">
-													980 KB
-												</div>
-											</div>
-										</div>
-										<div class="frame">
-											<button on:click={copyImageUrl}
-												>Copy Image URL</button
-											>
-											<button
-												on:click={() =>
-													downloadImage(
-														"./images/image.jpg",
-														"image.jpg"
-													)}>Download</button
-											>
-										</div>
-									</div>
-								</div>
-								<div class="property-default">
-									<div
-										class="size-select"
-										data-selected="false"
-									>
-										<div class="image-dim">
-											<div class="text-wrapper">
-												1600 x 1200
-											</div>
-										</div>
-									</div>
-									<div class="image-main">
-										<img
-											class="rectangle"
-											src="./images/image.jpg"
-											alt="image1"
-										/>
-										<div class="div">Image_name</div>
-									</div>
-									<div class="image-tail">
-										<div class="image-type">
-											<div class="div-wrapper">
-												<div class="text-wrapper-2">
-													ICO
-												</div>
-											</div>
-											<div class="file-size">
-												<div class="text-wrapper-3">
-													980 KB
-												</div>
-											</div>
-										</div>
-										<div class="frame">
-											<button on:click={copyImageUrl}
-												>Copy Image URL</button
-											>
-											<button
-												on:click={() =>
-													downloadImage(
-														"./images/image.jpg",
-														"image.jpg"
-													)}>Download</button
-											>
-										</div>
-									</div>
+										{/each}
+									{/if}
 								</div>
 							</div>
 						</div>
@@ -2013,7 +1624,9 @@
 
 	.box .property-hover {
 		left: 20px;
-		display: flex;
+		display: flexbox;
+		display: grid;
+		grid-row: inherit;
 		flex-direction: column;
 		width: 243px;
 		align-items: center;
