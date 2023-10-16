@@ -101,3 +101,12 @@ Then, from within your project folder:
 npm run build
 surge public my-project.surge.sh
 ```
+![2_serv](https://github.com/Comder101/devstar_img/assets/99659484/ca163a48-67db-4c1b-bfc7-4897840f7cbf)
+![1_serv](https://github.com/Comder101/devstar_img/assets/99659484/834b1d40-2f37-401c-b38c-997c82755a4a)
+![image_extractor](https://github.com/Comder101/devstar_img/assets/99659484/412f9939-ea85-4c8f-8191-bd89062d131c)
+![3_serv](https://github.com/Comder101/devstar_img/assets/99659484/6975403a-c798-4370-adb2-5c2d386bb74b)
+![futurism](https://github.com/Comder101/devstar_img/assets/99659484/75a3fd6e-4f8a-4ce7-856e-fd8782adab3b)
+![astronaut](https://github.com/Comder101/devstar_img/assets/99659484/a0e72fea-40c6-48aa-80a1-44c24ec43ba3)
+![van-gogh-starry-night-min](https://github.com/Comder101/devstar_img/assets/99659484/bcaf0902-4b6d-4b65-8bc4-50537b4324d9)
+![most-famous-paintings-guernica](https://github.com/Comder101/devstar_img/assets/99659484/4530ad99-11fd-4432-af76-5e9e4f4cc80a)
+![mona-lisa](https://github.com/Comder101/devstar_img/assets/99659484/05bc054f-677f-411a-be73-083a9fc6d0bd)
