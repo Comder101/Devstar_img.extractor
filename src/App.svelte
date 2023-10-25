@@ -258,7 +258,7 @@
 
 <div class="header">
 	<div class="image-extractor">
-		<!-- <img class="image" src="img/image.png" alt="1" /> -->
+ <img class="image" src="img/image.png" alt="1" /> 
 		<div class="text-wrapper">Image Extractor</div>
 	</div>
 	<div class="nav-bar">
@@ -582,35 +582,15 @@
 					<div class="text-wrapper-18">What is extract.pics?</div>
 					<div class="lorem-ipsum-dolor">
 						<p class="p">
-							Lorem ipsum dolor sit amet consectetur. Orci
-							consequat congue orci etiam mattis aliquam tincidunt
-							felis porttitor. Tortor turpis aliquam ullamcorper
-							nam erat consequat. Et amet pellentesque turpis eget
-							ac justo eu gravida. Sed sodales feugiat mauris
-							aliquam blandit justo bibendum proin. Pretium risus
-							quis varius vestibulum sed leo cras morbi. Cras
-							lectus ut mattis ligula pretium lacus commodo.
-							Ullamcorper nam consequat morbi eros lorem sit. Et
-							ullamcorper consequat sit nunc eget quam. Lacus
-							massa magna scelerisque ac interdum.
+							Image Extractor is a versatile online tool designed to simplify the process of extracting images from web pages. Whether you're a graphic designer, content creator, or simply interested in collecting visual content from the web, Image Extractor offers an efficient and user-friendly solution.
 						</p>
 					</div>
 				</div>
 				<div class="faq-frame">
-					<div class="text-wrapper-18">What is extract.pics?</div>
+					<div class="text-wrapper-18"></div>
 					<div class="lorem-ipsum-dolor">
 						<p class="p">
-							Lorem ipsum dolor sit amet consectetur. Orci
-							consequat congue orci etiam mattis aliquam tincidunt
-							felis porttitor. Tortor turpis aliquam ullamcorper
-							nam erat consequat. Et amet pellentesque turpis eget
-							ac justo eu gravida. Sed sodales feugiat mauris
-							aliquam blandit justo bibendum proin. Pretium risus
-							quis varius vestibulum sed leo cras morbi. Cras
-							lectus ut mattis ligula pretium lacus commodo.
-							Ullamcorper nam consequat morbi eros lorem sit. Et
-							ullamcorper consequat sit nunc eget quam. Lacus
-							massa magna scelerisque ac interdum.
+							
 						</p>
 					</div>
 				</div>
@@ -619,13 +599,6 @@
 				<div class="frame-7">
 					<img class="img-2" src="img/copyright.png" alt="" />
 					<div class="text-wrapper-19">image-extract</div>
-				</div>
-				<div class="frame-8">
-					<div class="text-wrapper-20">Status</div>
-					<div class="text-wrapper-21">Changelog</div>
-					<div class="text-wrapper-19">Documentation</div>
-					<div class="text-wrapper-19">Privacy and Cookie</div>
-					<div class="text-wrapper-19">Terms of service</div>
 				</div>
 			</footer>
 		</div>
@@ -656,7 +629,7 @@
 		position: relative;
 		width: fit-content;
 		margin-top: -1px;
-		font-family: "Jost-Medium", Helvetica;
+		font-family: "Jost-Medium", sans-serif;
 		font-weight: 500;
 		color: #282445;
 		font-size: 30px;
@@ -704,7 +677,7 @@
 		position: relative;
 		width: fit-content;
 		margin-top: -5.5px;
-		margin-bottom: -3.5px;
+		margin-bottom: -5.5px;
 		font-family: "Jost-Medium", Helvetica;
 		font-weight: 500;
 		color: #f5f0f3;
@@ -726,12 +699,12 @@
 	}
 
 	.home-text {
-		color: rgb(0, 0, 0);
+		color: rgba(236, 231, 231, 0.87);
 		height: auto;
 		font-size: 70px;
 		font-style: Medium;
 		text-align: left;
-		font-family: Jost;
+		font-family: Arial, Helvetica, sans-serif;
 		font-weight: 500;
 		line-height: normal;
 		font-stretch: normal;
@@ -739,12 +712,12 @@
 	}
 
 	.home-text02 {
-		color: rgb(0, 0, 0);
+		color: rgb(233, 225, 225);
 		height: auto;
 		font-size: 20px;
 		font-style: Bold;
 		text-align: left;
-		font-family: Bitter;
+		font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 		font-weight: 700;
 		line-height: normal;
 		font-stretch: normal;
@@ -805,19 +778,18 @@
 	}
 
 	.res-load {
-		background-color: transparent;
+
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		position: relative;
-		/* background-image: url("./background.jpg"); */
-		background-color: #6debf3;
+	    background-image: url(https://img.freepik.com/free-vector/background-realistic-abstract-technology-particle_23-2148431735.jpg?size=626&ext=jpg&ga=GA1.1.1578860698.1698253940&semt=ais);
 		background-size: cover;
 	}
 
 	.res-load .div {
-		/* background-image: url(./background.jpg); */
-		background-color: #6debf3;
+		background-color: transparent;
+		background-image: url(https://img.freepik.com/free-vector/background-realistic-abstract-technology-particle_23-2148431735.jpg?size=626&ext=jpg&ga=GA1.1.1578860698.1698253940&semt=ais);
 		background-size: cover;
 		position: relative;
 	}
@@ -1238,7 +1210,7 @@
 
 	.res-load .white-button-2 {
 		padding: 5px 15px;
-		background-color: #f5f0f3;
+		background-color: #ff029a;
 		border-radius: 5px;
 		display: inline-flex;
 		align-items: center;
@@ -1246,7 +1218,7 @@
 		gap: 10px;
 		position: relative;
 		flex: 0 0 auto;
-		box-shadow: 0px 4px 4px #00000040;
+		box-shadow: 0px 0px 0px #00000040;
 	}
 
 	.res-load .copy-selected-urls {
@@ -1263,7 +1235,7 @@
 
 	.res-load .white-button-3 {
 		padding: 10px 15px;
-		background-color: #282445;
+		background-color: #2d17daf8;
 		border-radius: 10px;
 		display: inline-flex;
 		align-items: center;
@@ -1271,7 +1243,7 @@
 		gap: 10px;
 		position: relative;
 		flex: 0 0 auto;
-		box-shadow: 0px 4px 4px #00000040;
+		box-shadow: 0px 0px 0px #00000040;
 	}
 
 	.res-load .text-wrapper-12 {
