@@ -1,8 +1,8 @@
-const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const cors = require('cors');
 const https = require('https');
+
 
 const app = express();
 const corsOptions = {
@@ -14,10 +14,13 @@ const corsOptions = {
 app.use(cors(corsOptions));
 const PORT = process.env.PORT || 5000;
 
-app.use(express.json());
 
-app.post('/api/scrape', async (req, res) => {
-  const { url } = req.body;
+    // Parse HTML using Cheerio
+    const $ = cheerio.load(html);
+
+    // Select image elements (adjust the selector based on the structure of the HTML)
+    const imageElements = $('img');
+
 
   try {
     const response = await axios.get(url, {
@@ -25,15 +28,19 @@ app.post('/api/scrape', async (req, res) => {
     });
     const $ = cheerio.load(response.data);
 
-    const imgUrls = $('img').map((_, img) => $(img).attr('src')).get();
 
-    res.json({ success: true, imgUrls });
+    // Filter URLs by extension (e.g., only include '.jpg' and '.png' images)
+    const allowedExtensions = ['.jpg', '.jpeg', '.png'];
+    const filteredUrls = imageUrls.filter(url => allowedExtensions.some(ext => url.endsWith(ext)));
+
+    return filteredUrls;
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, error: 'Internal Server Error' });
+    console.error('Error:', error.message);
   }
-});
+}
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+
 });
