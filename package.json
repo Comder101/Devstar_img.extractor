@@ -2,11 +2,11 @@
   "name": "svelte-app",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --no-clear"
+    "start": "node server.cjs"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
