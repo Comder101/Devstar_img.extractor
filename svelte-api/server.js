@@ -1,11 +1,19 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const cors = require('cors');
+const https = require('https');
 
-async function scrapeImages(url) {
-  try {
-    // Fetch HTML content of the page
-    const response = await axios.get(url);
-    const html = response.data;
+
+const app = express();
+const corsOptions = {
+  origin: 'http://localhost:8080',
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+const PORT = process.env.PORT || 5000;
+
 
     // Parse HTML using Cheerio
     const $ = cheerio.load(html);
@@ -13,8 +21,13 @@ async function scrapeImages(url) {
     // Select image elements (adjust the selector based on the structure of the HTML)
     const imageElements = $('img');
 
-    // Extract image source URLs
-    const imageUrls = imageElements.map((_, element) => $(element).attr('src')).get();
+
+  try {
+    const response = await axios.get(url, {
+      httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+    });
+    const $ = cheerio.load(response.data);
+
 
     // Filter URLs by extension (e.g., only include '.jpg' and '.png' images)
     const allowedExtensions = ['.jpg', '.jpeg', '.png'];
@@ -26,8 +39,8 @@ async function scrapeImages(url) {
   }
 }
 
-// Example usage
-const url = 'https://www.iitb.ac.in/';
-scrapeImages(url).then(filteredUrls => {
-  console.log('Filtered Image URLs:', filteredUrls);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+
 });
